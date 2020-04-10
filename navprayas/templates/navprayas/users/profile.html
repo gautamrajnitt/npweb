@@ -1,0 +1,83 @@
+{% extends "navprayas/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="section-gap achivement-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="achivement-content">
+                    <h2>Your profile</h2>
+                    <hr>
+                    <p>  Email : <b>{{ request.user.email }} </b>(Contact Office For Update) </p>
+                    <hr>
+                    <form method="POST" >
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ p_form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="button">Edit</button>
+                            <button class="btn btn-outline-info" type="submit">Save</button>
+                        </div>
+                    </form>
+                    </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="achivement-content">
+                  <h3>My Applications</h2>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>S. No.</th>
+                          <th>Application for</th>
+                          <th>Your response</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for i,j in status.items %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{i}}</td>
+                          <td><strong> {{j|safe}}</strong></td>
+                        </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</section>
+<!-- <section class="section-gap achivement-area">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-15">
+				<div class="achivement-content">
+					<h3>My Applications</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>S. No.</th>
+                  <th>Application for</th>
+                  <th>Your response</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>MTSE</td>
+                  <td>Click here to see your filled form</td>
+                </tr> 
+              </tbody>
+            </table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section> -->
+{% endblock  %}
+
